@@ -59,7 +59,24 @@ body <- dashboardBody(
               # input box ----
               box(width = 4,
                   
-                  "sliderInputs here"
+                  # "sliderInputs here"
+                  textInput("Scientific Name", 
+                            label = "Scientific Name", 
+                            value = "", 
+                            width = "100%",
+                            placeholder = "Pinus ponderosa"),
+                  textInput("common Name", "Common Name",
+                            placeholder = "Western Yellow Pine"),
+                  selectInput("Sugar Pine", "What species?",
+                              c("Sugar Pine")),
+                  selectInput("demo_select2", 
+                              label = "Map Type (Select 1)", 
+                              choices = c("Sensitivty ", "Vulnerabilty "),
+                              selected = NULL,
+                              multiple = FALSE, 
+                              selectize = FALSE,
+                              size = 2)
+                  
                   
               ), # END input box
               
