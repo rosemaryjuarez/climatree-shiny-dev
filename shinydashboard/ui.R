@@ -106,7 +106,7 @@ body <- dashboardBody(
                   ),# leaflet box ----
               box(width = 6, 
                   
-                  "leafletOutput here"
+                  "leafletOutput here, Hi Vanessa!"
                   
               ) # END leaflet box
               
