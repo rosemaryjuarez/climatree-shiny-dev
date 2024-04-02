@@ -15,7 +15,7 @@ sidebar <- dashboardSidebar(
     
     menuItem(text = "About", tabName = "about", icon = icon("house")),
     menuItem(text = "Dashboard", tabName = "dashboard", icon = icon("leaf")),
-    menuItem(text = "Research", tabName = "reasearch", icon = icon("lightbulb"))
+    menuItem(text = "Research", tabName = "research", icon = icon("lightbulb"))
     
   ) # END sidebarMenu
   
@@ -89,7 +89,31 @@ body <- dashboardBody(
               
             ) # END fluidRow
             
+    ), # END dashboard tabItem
+    
+    
+    tabItem(tabName = "research",
+            
+            # fluidRow ----
+            fluidRow(
+              
+              # input box ----
+              box(width = 6,
+                  
+                  "Data Description Here" # END input box
+              
+              
+                  ),# leaflet box ----
+              box(width = 6, 
+                  
+                  "leafletOutput here"
+                  
+              ) # END leaflet box
+              
+            ) # END fluidRow
+            
     ) # END dashboard tabItem
+    
     
   ) # END tabItems
   

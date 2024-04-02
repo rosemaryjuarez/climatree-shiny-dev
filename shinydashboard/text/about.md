@@ -11,3 +11,9 @@ To confront the challenges of tree sensitivity mapping, our goal with the dashbo
 We hope this dashboard can act as a tool to map tree vulnerarlity as a result of sentivity to changing climate conditions.
 
 #### The Approach
+
+The Approach to mapping tree species sensitivity builds upon the global tree mapping created from the [Treecenomics Git Hub Repository](https://github.com/rheilmayr/Treeconomics/tree/public) that hosts the tree mapping code from Dr. Joan Dudney's aforementioned paper. 
+
+Tree sensitivity is a relationship of climatic conditions defined by a regression model that takes water and energy availability in its environment as parameters.
+
+[insert approach to mapping, reference treecenomics]
