@@ -69,13 +69,11 @@ body <- dashboardBody(
                             placeholder = "Western Yellow Pine"),
                   selectInput("Sugar Pine", "What species?",
                               c("Sugar Pine")),
-                  selectInput("demo_select2", 
-                              label = "Map Type (Select 1)", 
-                              choices = c("Sensitivty ", "Vulnerabilty "),
-                              selected = NULL,
-                              multiple = FALSE, 
-                              selectize = FALSE,
-                              size = 2)
+                  radioButtons("rb", 
+                               label = "Choose map type:",
+                               c("Vulnerabilty " = "norm",
+                                 "Sensitivity" = "unif")
+                  )
                   
                   
               ), # END input box
@@ -83,7 +81,11 @@ body <- dashboardBody(
               # leaflet box ----
               box(width = 8, 
                   
-                  "leafletOutput here"
+                  title = tags$strong("Test Map Output"),
+                  
+                  #leaflet otuput ----
+                  leafletOutput(outputId = "test_map_output") %>%
+                    withSpinner(type = 1, color = "cyan4")
                   
               ) # END leaflet box
               
@@ -97,16 +99,16 @@ body <- dashboardBody(
             # fluidRow ----
             fluidRow(
               
-              # input box ----
+              # data description box ----
               box(width = 6,
                   
                   "Data Description Here" # END input box
               
               
-                  ),# leaflet box ----
+                  ),# Paper description box ----
               box(width = 6, 
                   
-                  "leafletOutput here, Hi Vanessa!"
+                  "Paper Description Here"
                   
               ) # END leaflet box
               
