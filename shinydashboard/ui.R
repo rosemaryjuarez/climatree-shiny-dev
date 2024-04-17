@@ -31,10 +31,10 @@ body <- dashboardBody(
     tabItem(tabName = "about",
             
             # left-hand column ----
-            column(width = 8,
+            column(width = 12,
                    
                    # background box ----
-                   box(width = NULL,
+                   box(width = 12,
                        
                        title = tagList(icon("tree"), strong("Monitoring Tree Vulnerabilty ")),
                        includeMarkdown("text/about.md")
@@ -57,7 +57,9 @@ body <- dashboardBody(
             fluidRow(
               
               # input box ----
-              box(width = 4,
+              box(width = 12,
+                  #start box 
+                  flowLayout(
                   
                   # "sliderInputs here"
                   textInput("Scientific Name", 
@@ -67,26 +69,27 @@ body <- dashboardBody(
                             placeholder = "Pinus ponderosa"),
                   textInput("common Name", "Common Name",
                             placeholder = "Western Yellow Pine"),
-                  selectInput("Sugar Pine", "What species?",
-                              c("Sugar Pine")),
-                  radioButtons("rb", 
-                               label = "Choose map type:",
-                               c("Vulnerabilty " = "norm",
-                                 "Sensitivity" = "unif")
-                  )
+                  textInput("Sugar Pine", "Species Code (ex. pcgl)",
+                            placeholder = "pcgl")
+                  ), # end of flow layout
+                  verticalLayout(radioButtons("rb", 
+                                              label = "Choose map type:",
+                                              c("Vulnerabilty " = "norm",
+                                                "Sensitivity" = "unif"),
+                                              inline = TRUE))
                   
                   
               ), # END input box
               
               # leaflet box ----
-              box(width = 8, 
-                  
+              box(width = 8,
+
                   title = tags$strong("Test Map Output"),
-                  
+
                   #leaflet otuput ----
                   leafletOutput(outputId = "test_map_output") %>%
                     withSpinner(type = 1, color = "cyan4")
-                  
+
               ) # END leaflet box
               
             ) # END fluidRow

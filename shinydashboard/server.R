@@ -1,34 +1,45 @@
 server <- function(input, output) {
   
   
-  # filter for specific columns cwd_change, cwd_sens, rwi_pred_change_mean
-  filtered_pcgl_pred_data <- reactive ({
-    pcgl_pred_data %>% 
-      rename(lng = x, lat = y) %>% 
-      select(lng, lat, cwd_change, cwd_sens, rwi_pred_change_mean)
+  # filter for specific columns x, y cwd_change, cwd_sens, rwi_pred_change_mean
+cw_mean_raster <- reactive ({
+  cwd_raster %>% mean()
   })
-  
-  
+
+aet_raster <- reactive({
+  aet_raster %>% mean()
+})
   
   # build leaflet map 
   output$test_map_output <-renderLeaflet({
     leaflet() %>% 
       
-      # add tiles 
-      # add tiles
-      addProviderTiles(providers$Esri.WorldImagery) %>% 
+      addTiles(options = tileOptions(minZoom = 2)) %>%
+      addRasterImage(cw_mean_raster(),
+                     colors = palette_orange_blue,
+                     layerId = "cwd_layer",
+                     opacity = 1) 
       
-      # set view over
-      setView(zoom = 6) %>% 
-      
-      # add mini map
-      addMiniMap(toggleDisplay = TRUE, minimized = TRUE) 
-      
-      # plot
-      addPolygons(filtered_pcgl_pred_data())
-      
-      
+                  
+    # fillColor = "transparent", 
+                  # color = "black", 
+                  # weight = 1) %>%
+    
+    # # Add raster data
+    # addRasterImage(filtered_pcgl_pred_data() %>% drop_na(), 
+    #                colors = "Set1", 
+    #                opacity = 1, 
+    #                project = FALSE, 
+    #                layerId = "raster_layer") %>%
+    
+    # Define legend
+    # addLegend("bottomleft",
+    #           colors = "Set1", 
+    #           labels = c("Sens."), 
+    #           opacity = 1)
+    
+    # Set map view
+    #setView(lng = mean(lon_lims), lat = mean(lat_lims), zoom = 3)
       
   })
-
 }
