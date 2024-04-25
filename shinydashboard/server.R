@@ -1,25 +1,45 @@
 server <- function(input, output) {
   
   
-  # filter for specific columns x, y cwd_change, cwd_sens, rwi_pred_change_mean
-cw_mean_raster <- reactive ({
-  cwd_raster %>% mean()
-  })
+  # filter for specific columns x, y, cwd_sens, rwi_pred_change_mean
+# cw_mean_raster <- reactive ({
+#   cwd_raster %>% mean()
+#   })
+# 
+# aet_raster <- reactive({
+#   aet_raster %>% mean()
+# })
 
-aet_raster <- reactive({
-  aet_raster %>% mean()
-})
+pcgl_data <- reactive ({
+  #req(input$file)
+  make_raster(pcgl_pred_data)
   
-  # build leaflet map 
-  output$test_map_output <-renderLeaflet({
-    leaflet() %>% 
-      
+})
+
+  #build leaflet map
+  output$test_map_output_1 <-renderLeaflet({
+    leaflet() %>%
+
       addTiles(options = tileOptions(minZoom = 2)) %>%
       addRasterImage(cw_mean_raster(),
                      colors = palette_orange_blue,
                      layerId = "cwd_layer",
-                     opacity = 1) 
+                     opacity = 1)
+  })
+  
+  output$test_map_output <-renderLeaflet({
+    leaflet() %>%
+      addTiles() %>%
+      # --- set View to ext of data  
       
+      # --- add raster image
+      addRasterImage(pcgl_data()[["cwd_sens"]],
+                     colors = palette_orange_blue,
+                     opacity = 1)
+  })
+  
+  
+
                   
     # fillColor = "transparent", 
                   # color = "black", 
@@ -41,5 +61,4 @@ aet_raster <- reactive({
     # Set map view
     #setView(lng = mean(lon_lims), lat = mean(lat_lims), zoom = 3)
       
-  })
 }

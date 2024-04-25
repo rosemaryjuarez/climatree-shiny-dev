@@ -1,0 +1,111 @@
+```{r}
+library(tidyverse)
+library(leaflet)
+library(tmap)
+library(paletteer)
+library(terra)
+# library(tmap)
+# 
+# head(pcgl_pred_data)
+# 
+# sp::coordinates(pcgl_pred_data)<- c("x","y")
+# 
+# View(pcgl_pred_data)
+# 
+# 
+# 
+# 
+# # Load your SpatVector object
+pcgl_pred_data_1<- readRDS("~/../../capstone/climatree/output/1-process-raw-data/spp_predictions_pcgl.rds") 
+#   #terra::vect(geom=c("x", "y"), crs="epsg:25831", keepgeom=TRUE) %>% 
+#   terra::rast()
+# 
+# plot(pcgl_pred_data_1)
+# 
+# # cwd_change plot
+# plot(pcgl_pred_data_1[["cwd_change"]])
+# 
+# leaflet() %>% addTiles() %>%
+#   addRasterImage(pcgl_pred_data_1)
+# 
+# tm_shape() %>% 
+#   tm_raster()
+
+# pcgl_pred <- pcgl_pred_data_1 %>% 
+#       rename(lng = x, lat = y) %>% 
+#       dplyr::select(lng, lat, cwd_change, cwd_sens, rwi_pred_change_mean)
+
+aet_raster
+
+# cwd_raster plot
+#plot(pcgl_pred_data_1[["cwd_change"]])
+plot(aet_raster[["layer.1.1.1.1.1"]])
+
+leaflet() %>% addTiles() %>%
+  addRasterImage(aet_raster[["layer.1.1.1.1.1"]])
+
+plot(mean(aet_raster))
+
+
+pcgl_rast <- pcgl_pred_data %>% 
+  terra::rast() %>% 
+  stack()
+
+
+
+# ---begin raster and map steps 
+
+pcgl_data <- pcgl_pred_data %>%
+  rename(lng = x, lat = y) %>%
+  dplyr::select(lng, lat, cwd_sens, rwi_pred_change_mean) %>%
+  terra::rast() 
+
+crs(pcgl_data) <-"epsg:25831"
+
+test_rast <- pcgl_data[["cwd_sens"]]
+plot(test_rast)
+
+x = list(ext(test_rast))[[1]][1]
+
+xmin <- xmin(ext(test_rast))
+xmax <- xmax(ext(test_rast))
+ymin <- ymin(ext(test_rast))
+ymax <- ymax(ext(test_rast))
+
+center_lat <- (ymin + ymax) / 2
+center_lon <- (xmin + xmax) / 2
+
+
+map <- leaflet() %>%
+  #addProviderTiles("Stamen.Watercolor") %>% 
+  #longitude values are considered the x-coordinate
+  # flyToBounds(lng1 = list(ext(test_rast))[[1]][1], 
+  #             lat1 = list(ext(test_rast))[[1]][3],
+  #             lng2 = list(ext(test_rast))[[1]][2],
+  #             lat2 = list(ext(test_rast))[[1]][4]) %>% 
+  addTiles() %>%
+  setView(lng = center_lon, lat = center_lat, zoom = 3) %>% 
+  addRasterImage(test_rast,
+                 colors = palette_orange_blue,
+                 opacity = 1)
+  
+  # Set the view using the
+  # extent's center and a zoom level
+
+
+#---end steps 
+
+  
+crs(aet_raster)
+
+cwd_raster
+
+pcgl_pred_data<- read_rds("~/../../capstone/climatree/output/1-process-raw-data/spp_predictions_pcgl.rds")
+
+essential_cwd<- read_csv("~/../../capstone/climatree/raw_data/essentialcwd_data.csv")
+
+species_meta <- read_csv("~/../../capstone/climatree/raw_data/species_metadata.csv")
+
+top_sp_codes <- read_csv("~/../../capstone/climatree/output/1-process-raw-data/top_sp_codes.csv")
+
+```
