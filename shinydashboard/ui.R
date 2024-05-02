@@ -23,7 +23,16 @@ sidebar <- dashboardSidebar(
 ) # END dashboardSidebar
 
 #..........................dashboardBody.........................
+
+
 body <- dashboardBody(
+  
+  # header; load stylesheet & fontawesome kit ----
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "styles-sheet.css"),
+    tags$script(src = "https://kit.fontawesome.com/b7f4c476ba.js"),
+    includeHTML("www/google-analytics.html")
+  ), # END header
   
   # tabItems ----
   tabItems(
@@ -88,10 +97,10 @@ body <- dashboardBody(
                               size = NULL)
                   
                   ), # end of flow layout
-                  verticalLayout(radioButtons("rb", 
+                  verticalLayout(radioButtons(inputId = "map_type_button", 
                                               label = "Choose map type:",
-                                              c("Vulnerabilty " = "norm",
-                                                "Sensitivity" = "unif"),
+                                              c("Vulnerabilty " = "rwi_pred_change_mean",
+                                                "Sensitivity" = "cwd_sens"),
                                               inline = TRUE))
                   
                   

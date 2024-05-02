@@ -1,19 +1,11 @@
 server <- function(input, output) {
   
-  
-  # filter for specific columns x, y, cwd_sens, rwi_pred_change_mean
-# cw_mean_raster <- reactive ({
-#   cwd_raster %>% mean()
-#   })
-# 
-# aet_raster <- reactive({
-#   aet_raster %>% mean()
-# })
 
 pcgl_data <- reactive ({
   #req(input$file)
+  # make raster of input tabular data 
   make_raster(pcgl_pred_data)
-  
+
 })
 
   #build leaflet map
