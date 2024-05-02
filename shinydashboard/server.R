@@ -28,6 +28,11 @@ pcgl_data <- reactive ({
   })
   
   output$test_map_output <-renderLeaflet({
+    
+    numcolor <- length(unique(pcgl_data()$cwd_sens))
+    mycolor <- palette_orange_blue
+    pal <- mycolor[1:numcolor] 
+    
     leaflet() %>%
       addTiles() %>%
       # --- set View to ext of data  
@@ -35,7 +40,28 @@ pcgl_data <- reactive ({
       # --- add raster image
       addRasterImage(pcgl_data()[["cwd_sens"]],
                      colors = palette_orange_blue,
-                     opacity = 1)
+                     opacity = 1) %>% 
+      addLegend("bottomleft",
+                colors = pal,
+                labels = unique(pcgl_data()$cwd_sens), 
+                #           opacity = 1)
+      )
+  })
+  
+  output$test_map_output_vul <-renderLeaflet({
+    leaflet() %>%
+      addTiles() %>%
+      # --- set View to ext of data  
+      
+      # --- add raster image
+      addRasterImage(pcgl_data()[["rwi_pred_change_mean"]],
+                     colors = palette_orange_blue,
+                     opacity = 1) %>% 
+      addLegend("bottomleft",
+                #           colors = "Set1",
+                labels = c("Sens."), 
+                #           opacity = 1)
+      )
   })
   
   

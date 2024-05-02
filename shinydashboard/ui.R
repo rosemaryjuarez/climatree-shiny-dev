@@ -2,10 +2,10 @@
 header <- dashboardHeader(
   
   # add title ----
-  title = "Tree Vulnerabilty Mapping",
-  titleWidth = 400
+  title = span("Mapping Tree Vulnerablity", style = "font-size: 18px;")
   
 ) # END dashboardHeader
+
 
 #........................dashboardSidebar........................
 sidebar <- dashboardSidebar(
@@ -15,7 +15,8 @@ sidebar <- dashboardSidebar(
     
     menuItem(text = "About", tabName = "about", icon = icon("house")),
     menuItem(text = "Dashboard", tabName = "dashboard", icon = icon("leaf")),
-    menuItem(text = "Research", tabName = "research", icon = icon("lightbulb"))
+    menuItem(text = "Research", tabName = "research", icon = icon("lightbulb")),
+    menuItem(text = "Data", tabName = "data", icon = icon("database"))
     
   ) # END sidebarMenu
   
@@ -36,7 +37,7 @@ body <- dashboardBody(
                    # background box ----
                    box(width = 12,
                        
-                       title = tagList(icon("tree"), strong("Monitoring Tree Vulnerabilty ")),
+                       title = tagList(icon("tree"), strong("Mapping Tree Vulnerabilty ")),
                        includeMarkdown("text/about.md")
                        # tags$img(src = "FishCreekWatershedSiteMap_2020.jpeg", 
                        #          alt = "A map of Northern Alaska, showing Fish Creek Watershed located within the National Petroleum Reserve.",
@@ -62,15 +63,30 @@ body <- dashboardBody(
                   flowLayout(
                   
                   # "sliderInputs here"
-                  textInput("Scientific Name", 
-                            label = "Scientific Name", 
-                            value = "", 
-                            width = "100%",
-                            placeholder = "Pinus ponderosa"),
-                  textInput("common Name", "Common Name",
-                            placeholder = "Western Yellow Pine"),
-                  textInput("Sugar Pine", "Species Code (ex. pcgl)",
-                            placeholder = "pcgl")
+                  selectInput(inputId = "genus_name",
+                              label = "Genus",
+                              choices = c("Genus"="",species_data_names$genus),
+                              multiple=TRUE,
+                              selectize = TRUE,
+                              width = NULL,
+                              size = NULL),
+                  conditionalPanel("input.genus_name",
+                                   selectInput(inputId = "species_name",
+                              label = "Scientific Name",
+                              choices = c("Scientific Name"="",species_data_names$spp),
+                              multiple=FALSE,
+                              selectize = TRUE,
+                              width = NULL,
+                              size = NULL)
+                  ),
+                  selectInput(inputId = "species_code",
+                              label = "Species Code",
+                              choices = c("4 Letter Code"="",species_data_names$sp_code),
+                              multiple=FALSE,
+                              selectize = TRUE,
+                              width = NULL,
+                              size = NULL)
+                  
                   ), # end of flow layout
                   verticalLayout(radioButtons("rb", 
                                               label = "Choose map type:",
