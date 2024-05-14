@@ -1,7 +1,7 @@
-## ClimaTree Dashboard 
+## ClimaTree Dashboard 💻
 Shiny App Development for ClimaTree
 
-## About the ClimaTree Dashboard 
+## About the ClimaTree Dashboard 🗺️
 
 This repository contains code that was used to create the interactive dashboard for the ClimaTree project. The envisioned audiences for this dashboard are land managers, policy makers or others simply curious about the topic. The main functions of this dashboard are to display both sensitivity and vulnerability (future growth prediction) maps of individual species. The user can choose which species and what type of map to look at, as well as interact with each map to get specific values and locations. The data used to create these maps is available for download in table format from the dashboard. 
 
