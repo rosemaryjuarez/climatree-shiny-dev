@@ -10,14 +10,34 @@ library(markdown)
 library(terra)
 
 
+library(shinyWidgets)
+
+library(DT)
+library(leaflet.extras)
+library(googleway)
+library(htmlwidgets)
+library(htmltools)
+library(fontawesome)
+library(fresh)
+library(sass)
+
+# ==== COMPILE CSS ==== 
+sass(
+  input = sass_file("www/sass-styles.scss"),
+  output = "www/sass-styles.css",
+  options = sass_options(output_style = "compressed") # OPTIONAL, but speeds up page load time by removing white-space & line-breaks that make css files more human-readable
+)
+
+
 # ==== READ IN DATA ====
 
 # read in spp_predictions_pcgl.rds file from Tsosie
-pcgl_pred_data<- read_rds("~/../../capstone/climatree/output/1-process-raw-data/spp_predictions_pcgl.rds")
+combined_pred<- read_csv("~/../../capstone/climatree/output/final-output/combined_predictions.csv")
 
-HistoricCWD <- load("~/../../capstone/climatree/raw_data/cmip5_cwdaet_end.Rdat")
 
-species_data_names <- read_csv("~/../../capstone/climatree/output/1-process-raw-data/top_sp_codes.csv")
+#HistoricCWD <- load("~/../../capstone/climatree/raw_data/cmip5_cwdaet_end.Rdat")
+
+species_data_names <- read_csv("~/../../capstone/climatree/assorted_data/top_sp_codes.csv")
 
 # ==== PALETTES ====
 palette <- c("#FEFFD9FF", "#FDFFD7FF", "#FDFED6FF", "#FCFED4FF", "#FBFED3FF", "#FAFDD1FF", "#FAFDD0FF", "#F9FDCEFF", "#F8FDCCFF", "#F8FCCBFF", "#F7FCC9FF", "#F6FCC8FF", "#F5FBC6FF", "#F5FBC5FF", "#F4FBC3FF", "#F3FAC1FF", "#F2FAC0FF", "#F1FABFFF", "#F0F9BEFF", "#EFF9BDFF", "#EEF9BCFF", "#EDF8BBFF", "#ECF8BBFF", "#EBF7BAFF", "#E9F7B9FF", "#E8F6B8FF", "#E7F6B8FF", "#E6F6B7FF", "#E5F5B6FF", "#E4F5B5FF", "#E2F4B4FF", "#E1F4B4FF", "#E0F3B3FF", "#DFF3B2FF", "#DDF2B2FF", "#DCF2B2FF", "#DAF1B2FF", "#D9F1B2FF", "#D7F0B2FF", "#D5F0B2FF", "#D4EFB2FF", "#D2EFB2FF", "#D0EEB1FF", "#CFEEB1FF", "#CDEDB1FF", "#CBECB1FF", "#CAECB1FF", "#C8EBB1FF", "#C6EBB1FF", "#C5EAB1FF", "#C3E9B1FF", "#C0E8B2FF", "#BDE7B2FF", "#BAE6B2FF", "#B8E5B3FF", "#B5E3B3FF", "#B2E2B3FF", "#AFE1B4FF", "#ACE0B4FF", "#A9DEB5FF", "#A6DDB5FF", "#A3DCB5FF", "#A0DBB6FF", "#9DDAB6FF", "#9AD8B6FF", "#97D7B7FF", "#94D6B7FF", "#92D5B7FF", "#8FD4B8FF", "#8DD3B8FF", "#8AD2B9FF", "#88D1B9FF", "#86D0BAFF", "#83CFBAFF", "#81CEBAFF", "#7ECDBBFF", "#7BCCBBFF", "#79CBBCFF", "#76CABCFF", "#73C9BDFF", "#70C8BDFF", "#6DC7BDFF", "#6AC6BEFF", "#68C5BEFF", "#66C4BFFF", "#64C3BFFF", "#62C2BFFF", "#60C1C0FF", "#5DC0C0FF", "#5BBFC0FF", "#59BFC1FF", "#57BEC1FF", "#54BDC1FF", "#52BCC2FF", "#4FBBC2FF", "#4DBAC3FF", "#4ABAC3FF", "#47B9C3FF", "#44B8C4FF", "#41B7C4FF")

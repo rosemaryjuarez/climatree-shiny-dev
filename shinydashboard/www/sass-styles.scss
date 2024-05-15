@@ -1,0 +1,61 @@
+// import & define fonts vars
+@import url('https://fonts.googleapis.com/css2?family=Karma&family=Prompt:wght@200&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+$font-family-serif: 'Karma', serif; 
+$font-family-sans-serif: 'Prompt', sans-serif;
+
+$font-family-Reddit-sans-serif: 'Roboto', sans-serif;
+
+// colors vars
+$sagegreen: #8aa877;
+$blue: #525cd1; 
+$orange: #E59C5E;
+$yellow: #f0eaa5;
+$white: #f1f7eb;
+
+$darkgreen:  #295a56;
+
+
+// css
+
+body {
+  background-color: $sagegreen; 
+}
+
+h1 {
+  font-family: $font-family-Reddit-sans-serif;
+}
+
+h2 {
+  letter-spacing: 5px;
+  font-family: $font-family-Reddit-sans-serif;
+}
+
+h3 {
+  
+  color: $darkgreen;
+}
+
+h4 {
+  color: $darkgreen;
+  font-family: $font-family-Reddit-sans-serif;
+}
+
+p {
+  font-family: $font-family-sans-serif;
+}
+
+a {
+  color: $sagegreen;
+}
+
+.navbar-default {
+  background-color: $sagegreen;
+}
+
+.btn.default.active {
+  background-color: $orange;
+}
