@@ -55,14 +55,14 @@ pcgl_rast <- pcgl_pred_data %>%
 
 # ---begin raster and map steps 
 
-pcgl_data <- pcgl_pred_data %>%
+combined_pred_raster <- combined_pred %>%
   rename(lng = x, lat = y) %>%
   dplyr::select(lng, lat, cwd_sens, rwi_pred_change_mean) %>%
   terra::rast() 
 
-crs(pcgl_data) <-"epsg:25831"
+crs(combined_pred_raster) <-"epsg:25831"
 
-test_rast <- pcgl_data[["cwd_sens"]]
+test_rast <- combined_pred_raster[["cwd_sens"]]
 plot(test_rast)
 
 x = list(ext(test_rast))[[1]][1]
@@ -77,15 +77,15 @@ center_lon <- (xmin + xmax) / 2
 
 
 map <- leaflet() %>%
-  #addProviderTiles("Stamen.Watercolor") %>% 
+  addProviderTiles("Stamen.Watercolor") %>% 
   #longitude values are considered the x-coordinate
   # flyToBounds(lng1 = list(ext(test_rast))[[1]][1], 
   #             lat1 = list(ext(test_rast))[[1]][3],
   #             lng2 = list(ext(test_rast))[[1]][2],
   #             lat2 = list(ext(test_rast))[[1]][4]) %>% 
   addTiles() %>%
-  setView(lng = center_lon, lat = center_lat, zoom = 3) %>% 
-  addRasterImage(test_rast,
+  #setView(lng = center_lon, lat = center_lat, zoom = 3) %>% 
+  addRasterImage( test_rast ,
                  colors = palette_orange_blue,
                  opacity = 1)
   
@@ -100,12 +100,15 @@ crs(aet_raster)
 
 cwd_raster
 
-pcgl_pred_data<- read_rds("~/../../capstone/climatree/output/1-process-raw-data/spp_predictions_pcgl.rds")
+# pcgl_pred_data<- read_rds("~/../../capstone/climatree/output/1-process-raw-data/spp_predictions_pcgl.rds")
+# 
+# essential_cwd<- read_csv("~/../../capstone/climatree/raw_data/essentialcwd_data.csv")
+# 
+# species_meta <- read_csv("~/../../capstone/climatree/raw_data/species_metadata.csv")
+# 
+# top_sp_codes <- read_csv("~/../../capstone/climatree/output/1-process-raw-data/top_sp_codes.csv")
 
-essential_cwd<- read_csv("~/../../capstone/climatree/raw_data/essentialcwd_data.csv")
+combined_pred <- read_csv("~/../../capstone/climatree/output/final-output/combined_predictions.csv")
 
-species_meta <- read_csv("~/../../capstone/climatree/raw_data/species_metadata.csv")
-
-top_sp_codes <- read_csv("~/../../capstone/climatree/output/1-process-raw-data/top_sp_codes.csv")
-
+combined_pred
 ```
