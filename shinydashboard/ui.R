@@ -16,7 +16,7 @@ sidebar <- dashboardSidebar(
     menuItem(text = "About", tabName = "about", icon = icon("house")),
     menuItem(text = "Vulnerabilty Maps", tabName = "dashboard", icon = icon("leaf")),
     #menuItem(text = "Research", tabName = "research", icon = icon("lightbulb")),
-    menuItem(text = "Data", tabName = "data", icon = icon("database"))
+    menuItem(text = "Data", tabName = "data", icon = icon("floppy-disk"))
     
   ) # END sidebarMenu
   
@@ -154,8 +154,17 @@ body <- dashboardBody(
             
             
             
-    ) # END dashboard tabItem
-    
+    ), # END dashboard tabItem
+    tabItem(tabName = "data",
+            
+            # fluidRow ----
+            fluidRow(
+              # input species codebox ----
+              box(width = 12,
+                  title = tagList(icon("floppy-disk"), strong("Data"))
+              )# end species code box 
+            )# END fluidRow
+    ) # END data tabItem
     
   ) # END tabItems
   
