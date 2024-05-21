@@ -57,15 +57,25 @@ body <- dashboardBody(
             
             # fluidRow
             fluidRow(
-              box(width = 6,
-                  title = tagList(icon("tree"), strong("Our Approach")),
-                  includeMarkdown("text/approach.md")
-              ),
-              box(width = 6,
-                  title = tagList(icon("tree"), strong("Research")),
-                  includeMarkdown("text/research.md")
+              box(width = 12,
+                  title = tagList(icon("tree"), strong("Available Tree Species")),
+                  selectInput(inputId = "filterType",
+                              label = "Filter by:",
+                              choices = c("All", "Common Name", "Species Code", "Scientific name")),
+                  conditionalPanel(
+                    condition = "input.filterType != 'All'",
+                    selectInput(inputId = "speciesFilter",
+                                label = "Select Species:",
+                                choices = NULL)
+                  ),
+                  dataTableOutput("speciesTable")
                   
-                  )
+              ),
+              # box(width = 6,
+              #     title = tagList(icon("tree"), strong("Research")),
+              #     includeMarkdown("text/research.md")
+              #     
+              #     )
               
               
             ) # end of fluidRow

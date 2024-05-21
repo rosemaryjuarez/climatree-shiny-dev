@@ -32,7 +32,7 @@ library(sass)
 # ==== READ IN DATA ====
 
 # read in spp_predictions_pcgl.rds file from Tsosie
-combined_pred<- read_csv("~/../../capstone/climatree/output/final-output/combined_predictions.csv")
+#combined_pred<- read_csv("~/../../capstone/climatree/output/final-output/combined_predictions.csv")
 
 
 #HistoricCWD <- load("~/../../capstone/climatree/raw_data/cmip5_cwdaet_end.Rdat")

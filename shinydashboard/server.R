@@ -1,10 +1,60 @@
-server <- function(input, output) {
+server <- function(input, output, session) {
   
+##----------------------------------------------
   
+  # Update the choices of the speciesFilter selectInput based on the selected filter type
+  observeEvent(input$filterType, {
+    if (input$filterType == "Common Name") {
+      updateSelectInput(session, "speciesFilter",
+                        choices = c("All", unique(combined_pred$common_name)),
+                        selected = "All")
+    } else if (input$filterType == "Species Code") {
+      updateSelectInput(session, "speciesFilter",
+                        choices = c("All", unique(combined_pred$spp_code)),
+                        selected = "All")
+    } else if (input$filterType == "Scientific name") {
+      updateSelectInput(session, "speciesFilter",
+                        choices = c("All", unique(combined_pred$spp)),
+                        selected = "All")
+    }
+  })
+  
+  # Filter the tree species data based on user input
+  filtered_data <- reactive({
+    if (input$filterType == "All") {
+      combined_pred
+    } else if (input$filterType == "Common Name") {
+      if ("All" %in% input$speciesFilter) {
+        combined_pred
+      } else {
+        combined_pred[combined_pred$common_name %in% input$speciesFilter, ]
+      }
+    } else if (input$filterType == "Species Code") {
+      if ("All" %in% input$speciesFilter) {
+        combined_pred
+      } else {
+        combined_pred[combined_pred$spp_code %in% input$speciesFilter, ]
+      }
+    } else if (input$filterType == "Scientific name") {
+      if ("All" %in% input$speciesFilter) {
+        combined_pred
+      } else {
+        combined_pred[combined_pred$spp %in% input$speciesFilter, ]
+      }
+    }
+  })
+  
+  # Render the filtered data table
+  output$speciesTable <- renderDataTable({
+    filtered_data()
+  })
+  
+}
+  #--------------------------------------------
   
 # make raster function 
 # eventually just read in leaflet_map fuction 
-output$test_map_output <- leaflet_map(input)
+#output$test_map_output <- leaflet_map(input)
 
 
 # --- correct map START
@@ -76,5 +126,3 @@ output$test_map_output <- leaflet_map(input)
   #                    opacity = 1) 
     
   # END renderLeaflet
-
-}
