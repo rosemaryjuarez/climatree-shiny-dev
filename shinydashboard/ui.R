@@ -46,12 +46,10 @@ body <- dashboardBody(
                    # background box ----
                    box(width = 12,
                        
-                       includeMarkdown("text/background.md")
-                       # tags$img(src = "FishCreekWatershedSiteMap_2020.jpeg", 
-                       #          alt = "A map of Northern Alaska, showing Fish Creek Watershed located within the National Petroleum Reserve.",
-                       #          style = "max-width: 100%;"),
-                       # tags$h6(tags$em("Map Source:", tags$a(href = "http://www.fishcreekwatershed.org/", "FCWO")),
-                       #         style = "text-align: center;")
+                       includeMarkdown("text/background.md"),
+                       tags$img(src = "25_species_map.png", 
+                                alt = "A Map of the 25 species within a global context. A majority of our range is within the Northern Hemisphere.",
+                                style = "max-width: 100%;")
                        
                    ) # END background box
                    
@@ -171,4 +169,10 @@ body <- dashboardBody(
 ) # END dashboardBody
 
 #..................combine all in dashboardPage..................
-dashboardPage(header, sidebar, body)
+dashboardPage(header, sidebar, body,
+              fresh::use_theme("fresh-theme.css"))
+
+
+
+
+
