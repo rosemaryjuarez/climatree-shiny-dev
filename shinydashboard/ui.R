@@ -2,7 +2,7 @@
 header <- dashboardHeader(
   
   # add title ----
-  title = span("Mapping Tree Vulnerablity", style = "font-size: 18px;")
+  title = span("Mapping Tree Sensitivity", style = "font-size: 18px;")
 
 ) # END dashboardHeader
 
@@ -41,15 +41,15 @@ body <- dashboardBody(
     tabItem(tabName = "about",
             
             # left-hand column ----
-            fluidRow(width = 12,
+            fluidRow(width = 10,
                    
                    # background box ----
-                   box(width = 12,
+                   box(width = 10,
                        
-                       includeMarkdown("text/background.md"),
-                       tags$img(src = "25_species_map.png", 
-                                alt = "A Map of the 25 species within a global context. A majority of our range is within the Northern Hemisphere.",
-                                style = "max-width: 100%;")
+                       #includeMarkdown("text/background.md"),
+                       tags$img(src = "range_26.jpg", 
+                                alt = "A Map of 26 species within a global context. A majority of our range is within the Northern Hemisphere.",
+                                style = "max-width:80%; text-align: center;display: block; margin-left: auto; margin-right: auto;")
                        
                    ) # END background box
                    
@@ -57,7 +57,7 @@ body <- dashboardBody(
             
             # fluidRow
             fluidRow(
-              box(width = 12,
+              box(width = 10,
                   title = tagList(icon("tree"), strong("Available Tree Species")),
                   selectInput(inputId = "filterType",
                               label = "Filter by:",
@@ -95,7 +95,7 @@ body <- dashboardBody(
               # input box ----
               box(width = 8,
                   title = tagList(icon("tree"), strong("Mapping Tree Vulnerabilty ")),
-                  includeMarkdown("text/mapping-tree-vulnerability.md"),
+                  #includeMarkdown("text/mapping-tree-vulnerability.md"),
                   #start box 
                   flowLayout(
                     

@@ -9,4 +9,4 @@ Climate change is having a range of effects on forests (positive and negative). 
 To confront the challenges of tree sensitivity mapping, our goal with the dashboard is to create maps that more accurately capture drought sensitivity in different species ranges primarily in wetter colder regions. **We hope this dashboard can act as a tool to map trees' sensitivity to water and energy availability under climate change conditions.**
 
 #### Species Range
-Below is a visual of the available species we have below. Our Species range includes [25] individual species.
+Below is a visual of the available species we have below. Our Species range includes 26 individual species.

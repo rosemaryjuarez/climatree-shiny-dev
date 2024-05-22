@@ -16,7 +16,7 @@ library(terra)
 # 
 # 
 # # Load your SpatVector object
-pcgl_pred_data_1<- readRDS("~/../../capstone/climatree/output/1-process-raw-data/spp_predictions_pcgl.rds") 
+#pcgl_pred_data_1<- readRDS("~/../../capstone/climatree/output/1-process-raw-data/spp_predictions_pcgl.rds") 
 #   #terra::vect(geom=c("x", "y"), crs="epsg:25831", keepgeom=TRUE) %>% 
 #   terra::rast()
 # 
