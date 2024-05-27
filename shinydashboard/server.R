@@ -1,55 +1,17 @@
 server <- function(input, output, session) {
   
 ##----------------------------------------------
-  
-  # Update the choices of the speciesFilter selectInput based on the selected filter type
-  observeEvent(input$filterType, {
-    if (input$filterType == "Common Name") {
-      updateSelectInput(session, "speciesFilter",
-                        choices = c("All", unique(combined_pred$common_name)),
-                        selected = "All")
-    } else if (input$filterType == "Species Code") {
-      updateSelectInput(session, "speciesFilter",
-                        choices = c("All", unique(combined_pred$spp_code)),
-                        selected = "All")
-    } else if (input$filterType == "Scientific name") {
-      updateSelectInput(session, "speciesFilter",
-                        choices = c("All", unique(combined_pred$spp)),
-                        selected = "All")
-    }
-  })
-  
-  # Filter the tree species data based on user input
-  filtered_data <- reactive({
-    if (input$filterType == "All") {
+    
+    # Render the data table with a search bar
+    output$speciesTable <- renderDataTable({
       combined_pred
-    } else if (input$filterType == "Common Name") {
-      if ("All" %in% input$speciesFilter) {
-        combined_pred
-      } else {
-        combined_pred[combined_pred$common_name %in% input$speciesFilter, ]
-      }
-    } else if (input$filterType == "Species Code") {
-      if ("All" %in% input$speciesFilter) {
-        combined_pred
-      } else {
-        combined_pred[combined_pred$spp_code %in% input$speciesFilter, ]
-      }
-    } else if (input$filterType == "Scientific name") {
-      if ("All" %in% input$speciesFilter) {
-        combined_pred
-      } else {
-        combined_pred[combined_pred$spp %in% input$speciesFilter, ]
-      }
-    }
-  })
-  
-  # Render the filtered data table
-  output$speciesTable <- renderDataTable({
-    filtered_data()
-  })
-  
-}
+    }, options = list(
+      searching = TRUE,
+      lengthChange = FALSE,
+      pageLength = 10
+    ))
+    
+  }
   #--------------------------------------------
   
 # make raster function 

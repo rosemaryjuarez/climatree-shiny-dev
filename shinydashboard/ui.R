@@ -14,7 +14,7 @@ sidebar <- dashboardSidebar(
   sidebarMenu(
     
     menuItem(text = "About", tabName = "about", icon = icon("house")),
-    menuItem(text = "Vulnerabilty Maps", tabName = "dashboard", icon = icon("leaf")),
+    menuItem(text = "Sensitivity Maps", tabName = "dashboard", icon = icon("leaf")),
     #menuItem(text = "Research", tabName = "research", icon = icon("lightbulb")),
     menuItem(text = "Data", tabName = "data", icon = icon("floppy-disk"))
     
@@ -59,15 +59,6 @@ body <- dashboardBody(
             fluidRow(
               box(width = 10,
                   title = tagList(icon("tree"), strong("Available Tree Species")),
-                  selectInput(inputId = "filterType",
-                              label = "Filter by:",
-                              choices = c("All", "Common Name", "Species Code", "Scientific name")),
-                  conditionalPanel(
-                    condition = "input.filterType != 'All'",
-                    selectInput(inputId = "speciesFilter",
-                                label = "Select Species:",
-                                choices = NULL)
-                  ),
                   dataTableOutput("speciesTable")
                   
               ),
@@ -94,7 +85,7 @@ body <- dashboardBody(
               
               # input box ----
               box(width = 8,
-                  title = tagList(icon("tree"), strong("Mapping Tree Vulnerabilty ")),
+                  title = tagList(icon("tree"), strong("Mapping Tree Sensitivity ")),
                   #includeMarkdown("text/mapping-tree-vulnerability.md"),
                   #start box 
                   flowLayout(

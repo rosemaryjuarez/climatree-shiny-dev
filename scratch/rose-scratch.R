@@ -7,3 +7,4 @@ combined_pred <- read_csv("~/../../capstone/climatree/output/final-output/combin
   left_join(meta_df, join_by(sp_code)) %>% 
   select(-x, -y, -cwd_sens) %>% 
   distinct(sp_code, .keep_all = TRUE)
+
